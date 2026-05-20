@@ -263,8 +263,13 @@ document.getElementById('todo-input').addEventListener('keydown', e => {
 });
 
 document.getElementById('logout-btn').addEventListener('click', async () => {
-  await db.auth.signOut();
-  location.href = 'login.html?logout=1';
+  // scope:'global'로 서버 측 refresh token까지 무효화
+  await db.auth.signOut({ scope: 'global' });
+  // Supabase가 localStorage에 남긴 sb-* 키 전체 제거
+  Object.keys(localStorage)
+    .filter(k => k.startsWith('sb-'))
+    .forEach(k => localStorage.removeItem(k));
+  location.href = 'login.html';
 });
 
 initAuth();

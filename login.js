@@ -4,18 +4,10 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const { createClient } = supabase;
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// 로그아웃 후 돌아온 경우 세션을 완전히 정리한 뒤 로그인 화면 유지
-// (소셜 로그인 자동인증 방지를 위해 logout 파라미터 확인)
-const params = new URLSearchParams(location.search);
-if (params.get('logout') === '1') {
-  db.auth.signOut().then(() => {
-    history.replaceState(null, '', location.pathname);
-  });
-} else {
-  db.auth.getSession().then(({ data: { session } }) => {
-    if (session) location.href = 'index.html';
-  });
-}
+// 이미 로그인된 세션이 있으면 앱으로 이동
+db.auth.getSession().then(({ data: { session } }) => {
+  if (session) location.href = 'index.html';
+});
 
 // ── 탭 전환 ──
 const loginForm  = document.getElementById('login-form');
