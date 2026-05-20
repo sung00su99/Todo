@@ -264,7 +264,7 @@ document.getElementById('todo-input').addEventListener('keydown', e => {
 
 document.getElementById('logout-btn').addEventListener('click', async () => {
   await db.auth.signOut();
-  location.href = 'login.html';
+  location.href = 'login.html?logout=1';
 });
 
 initAuth();
