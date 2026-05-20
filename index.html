@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="card">
+    <div class="user-header">
+      <span id="user-nickname"></span>
+      <button id="logout-btn" class="logout-btn">로그아웃</button>
+    </div>
+    <h1>Todo List</h1>
+    <div class="input-row">
+      <input type="text" id="todo-input" placeholder="할일을 입력하세요">
+      <select id="priority-select">
+        <option value="high">높음</option>
+        <option value="medium" selected>중간</option>
+        <option value="low">낮음</option>
+      </select>
+      <button id="add-btn">추가</button>
+    </div>
+    <div id="todo-list"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

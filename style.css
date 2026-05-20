@@ -1,0 +1,340 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+  background: #f0f2f5;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 32px 28px;
+  width: 100%;
+  max-width: 480px;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.input-row input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-row input:focus {
+  border-color: #4f8ef7;
+}
+
+.input-row button {
+  padding: 10px 18px;
+  background: #4f8ef7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.input-row button:hover {
+  background: #3373d6;
+}
+
+.input-row select {
+  padding: 10px 8px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  background: #fff;
+}
+
+/* ── Priority groups ── */
+
+#todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.priority-group {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px solid #e8e8e8;
+}
+
+.group-header {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  letter-spacing: 0.04em;
+}
+
+.group-header.high   { background: #fde8e8; color: #c0392b; }
+.group-header.medium { background: #fff3cd; color: #b8640a; }
+.group-header.low    { background: #e6f4ea; color: #2e7d32; }
+
+.group-items {
+  list-style: none;
+  min-height: 40px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: background 0.15s;
+}
+
+.group-items.drag-over-group {
+  background: #eef3ff;
+}
+
+/* ── Todo items ── */
+
+.group-items li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #f8f9fb;
+  border-radius: 7px;
+  cursor: default;
+  border: 2px solid transparent;
+  transition: opacity 0.2s, border-color 0.15s;
+}
+
+.group-items li.done {
+  opacity: 0.5;
+}
+
+.group-items li.dragging {
+  opacity: 0.35;
+}
+
+.group-items li.drag-over-top {
+  border-top-color: #4f8ef7;
+}
+
+.group-items li.drag-over-bottom {
+  border-bottom-color: #4f8ef7;
+}
+
+/* drag handle */
+.drag-handle {
+  color: #bbb;
+  font-size: 1rem;
+  cursor: grab;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.group-items li input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  accent-color: #4f8ef7;
+  flex-shrink: 0;
+}
+
+.group-items li .todo-text {
+  flex: 1;
+  font-size: 1rem;
+  color: #333;
+  word-break: break-all;
+}
+
+.group-items li.done .todo-text {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.group-items li .delete-btn {
+  background: none;
+  border: none;
+  color: #e05252;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.group-items li .delete-btn:hover {
+  background: #fde8e8;
+}
+
+/* ── Priority badge ── */
+
+.priority-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.priority-badge.high   { background: #fde8e8; color: #c0392b; }
+.priority-badge.medium { background: #fff3cd; color: #b8640a; }
+.priority-badge.low    { background: #e6f4ea; color: #2e7d32; }
+
+/* ── Time info ── */
+
+.time-info {
+  font-size: 0.7rem;
+  color: #aaa;
+  line-height: 1.5;
+  white-space: pre;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.group-items li.done .time-info {
+  color: #bbb;
+}
+
+/* ── Auth (login page) ── */
+
+.auth-tabs {
+  display: flex;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #999;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tab-btn.active {
+  color: #4f8ef7;
+  border-bottom-color: #4f8ef7;
+  font-weight: 600;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.form-group input {
+  padding: 10px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #4f8ef7;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #4f8ef7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.2s;
+}
+
+.submit-btn:hover {
+  background: #3373d6;
+}
+
+.error-msg {
+  color: #e05252;
+  font-size: 0.875rem;
+  min-height: 18px;
+  margin-bottom: 4px;
+}
+
+.success-msg {
+  color: #2e7d32;
+  font-size: 0.875rem;
+  min-height: 18px;
+  margin-bottom: 4px;
+}
+
+/* ── User header (todo page) ── */
+
+.user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid #f0f0f0;
+}
+
+.user-header span {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.logout-btn {
+  padding: 5px 13px;
+  background: none;
+  border: 1.5px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #888;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.logout-btn:hover {
+  border-color: #e05252;
+  color: #e05252;
+}
