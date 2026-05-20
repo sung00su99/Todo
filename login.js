@@ -56,6 +56,14 @@ document.getElementById('btn-google').addEventListener('click', async () => {
   if (error) alert('Google 로그인 실패: ' + error.message);
 });
 
+document.getElementById('btn-github').addEventListener('click', async () => {
+  const { error } = await db.auth.signInWithOAuth({
+    provider: 'github',
+    options: { redirectTo: REDIRECT_URL },
+  });
+  if (error) alert('GitHub 로그인 실패: ' + error.message);
+});
+
 // ── 회원가입 ──
 signupForm.addEventListener('submit', async e => {
   e.preventDefault();

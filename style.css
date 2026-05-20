@@ -383,3 +383,12 @@ h1 {
 .social-btn.google:hover {
   background: #f5f5f5;
 }
+
+.social-btn.github {
+  background: #24292e;
+  color: #fff;
+}
+
+.social-btn.github:hover {
+  background: #3a3f44;
+}
