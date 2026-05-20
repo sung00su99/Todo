@@ -45,6 +45,17 @@ loginForm.addEventListener('submit', async e => {
   location.href = 'index.html';
 });
 
+// ── Google 소셜 로그인 ──
+const REDIRECT_URL = 'https://sung00su99.github.io/Todo/index.html';
+
+document.getElementById('btn-google').addEventListener('click', async () => {
+  const { error } = await db.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: REDIRECT_URL },
+  });
+  if (error) alert('Google 로그인 실패: ' + error.message);
+});
+
 // ── 회원가입 ──
 signupForm.addEventListener('submit', async e => {
   e.preventDefault();
